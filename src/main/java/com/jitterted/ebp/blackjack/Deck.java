@@ -8,10 +8,9 @@ public class Deck {
   private final List<Card> cards = new ArrayList<>();
 
   public Deck() {
-    var cardValues = List.of("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K");
     for (Suit suit : Suit.values()) {
-      for (String cardValue : cardValues) {
-        cards.add(new Card(suit, cardValue));
+      for (String cardValue : Rank.CARD_VALUES) {
+        cards.add(new Card(suit, Rank.of(cardValue)));
       }
     }
     Collections.shuffle(cards);

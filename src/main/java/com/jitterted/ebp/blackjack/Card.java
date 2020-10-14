@@ -6,31 +6,25 @@ import static org.fusesource.jansi.Ansi.ansi;
 
 public class Card {
   private final Suit suit;
-  private final String rank;
+  private final Rank rank;
 
-  public Card(Suit suit, String rank) {
+  public Card(Suit suit, Rank rank) {
     this.suit = suit;
     this.rank = rank;
   }
 
   public int rankValue() {
-    if ("JQK".contains(rank)) {
-      return 10;
-    } else if (rank.equals("A")) {
-      return 1;
-    } else {
-      return Integer.parseInt(rank);
-    }
+    return rank.value();
   }
 
   public String display() {
     String[] lines = new String[7];
     lines[0] = "┌─────────┐";
-    lines[1] = String.format("│%s%s       │", rank, rank.equals("10") ? "" : " ");
+    lines[1] = String.format("│%s%s       │", rank, rank.displayRank());
     lines[2] = "│         │";
     lines[3] = String.format("│    %s    │", suit.displaySymbol());
     lines[4] = "│         │";
-    lines[5] = String.format("│       %s%s│", rank.equals("10") ? "" : " ", rank);
+    lines[5] = String.format("│       %s%s│", rank.displayRank(), rank);
     lines[6] = "└─────────┘";
 
     Ansi.Color cardColor = suit.isRed() ? Ansi.Color.RED : Ansi.Color.BLACK;
