@@ -10,11 +10,18 @@ public class Wallet {
     return balance == 0;
   }
 
+  public int balance() {
+    return balance;
+  }
+
   public void addMoney(int amount) {
+    requireGreaterThanZero(amount);
     balance += amount;
   }
 
-  public int balance() {
-    return balance;
+  private void requireGreaterThanZero(int amount) {
+    if (amount <= 0) {
+      throw new IllegalArgumentException();
+    }
   }
 }
